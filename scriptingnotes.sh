@@ -113,6 +113,22 @@ $? ---> previous command is success, it has zero
 
 shell script will store the command results in exit status. we can get it through #echo $!
 
+FUNCTIONS:
+
+After installing the git we will write the validation and again after installing mysql we will write validation script.
+
+to over come above repeted validation same script for both mysql and git we will use functions. That validation script we will
+
+keep in block, that is called function.
+
+syntax:
+
+VALIDATION( ) {
+
+   statement to run
+   
+}
+
 
 
 
