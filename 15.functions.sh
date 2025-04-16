@@ -2,7 +2,7 @@
 
 ID=$(id -u)
 
-VALIDATION( ) {
+VALIDATION( ) { #after variables we will write the function
     if [ $? -ne 0 ]
     then
         echo "ERROR: Installation is not done properly"

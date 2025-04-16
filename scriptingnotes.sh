@@ -26,13 +26,13 @@ SCRIPTING:-
 hello-world.sh ==> here .sh means shell
 #!/bin/bash== To check sysntax of our shell script.so we needs to give location of bash. it is first line in shell Script. it is called 
 shebang.
-        # means we dont consider this line.
+        # means we dont consider this line. other than shebang.
 
 echo "Hello shell script" == echo is used to print anything.
 
 sh scriptname.sh (or) ./scriptname.sh ==> To run shell script in linux system.
 
-key=value(here no gap)== this is also a syntax.
+key=value(here no gap)==> this is also a syntax.
 
 VARIABLES:- 
  variables are used for DRY concept, it means do not repeat yourself. it means change in one location that effect everywhere automatically.
@@ -126,8 +126,41 @@ syntax:
 VALIDATION( ) {
 
    statement to run
-   
+
 }
+
+VALIDATE == calling above function
+
+REDIRECTIONS: 
+REDIRECTIONS are very important to know success and failure of the script.
+ 1 --- is for success
+ 2 --- is for failure
+ & --- both success and failure
+
+ command > temp.log ---> by default only success output only store here.
+
+ ex:
+ ls -ltr 1>> temp.log ---> it will store only success 0/p
+
+ ls -ltr 2>> temp.log ---> it will stores only failure o/p
+
+ ls -ltr &>> temp.log ---> it will stores both success and failure o/password
+
+ SPECIAL VARIABLES IN SHELL SCRIPT
+ ---------------------------------
+ $? --- contains exit status of the previous command o/p
+ $0 --- Contains the script name
+ $1 --- First argument
+ $2 --- Second argument
+ $n --- nth argument
+ $@ --- To get all argyments
+ $# --- To know how many arguments passed
+ $$ --- Pid of the script
+ $! --- pid of the last command running in the background
+
+date+%f-%H-%M-%S --- To get the date of the system.
+
+
 
 
 
