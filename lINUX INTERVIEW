@@ -250,3 +250,282 @@ Answer:
 du -h --max-depth=1
 Explanation:
 This shows a readable breakdown of folder sizes one level deep. Very helpful when analyzing which folders are growing in size within applications, backups, or user directories.
+
+
+IMP NOTES
+---------
+chmod -v 644 file.txt --> what changes done it will show.
+
+vi Editor
+---------
+:se nu        # Show line numbers
+:se nonu      # Hide line numbers
+:90           # Go to line 90
+/data         # Search for 'data'
+dd            # Delete a line
+u             # Undo
+
+find Command (Search Files & Directories)
+-----------------------------------------
+find . -type f -empty                 # Find empty files in current directory
+find ~ -type f -empty                # Find empty files in home directory
+find /tmp -type f -empty            # Find empty files in /tmp
+find . -type d -name <dirName>      # Search directory by name
+
+find . -name deployment.yaml         # Case-sensitive search
+find . -iname deployment.yaml        # Case-insensitive search
+find . -type f -perm 0777            # Files with 777 permissions
+
+find . -mtime 1                      # Modified exactly 1 day ago
+find . -mtime -1                     # Modified less than 1 day ago
+find . -mtime +1                     # Modified more than 1 day ago
+
+find ./ -type f -name "*.txt"        # Find all .txt files
+
+sed Command (Stream Editor)
+---------------------------
+sed 's/unix/linux/' abc.txt          # Replace first occurrence
+sed 's/unix/linux/2' abc.txt         # Replace 2nd occurrence
+sed 's/unix/linux/g' abc.txt         # Replace all occurrences
+
+sed '3 s/unix/linux/' abc.txt        # Replace on line 3
+sed '3 s/am/was/p' sed.txt           # Duplicate replaced line
+sed -n 's/am/was/p' sed.txt          # Print only replaced lines
+
+sed '1,3 s/unix/linux/' abc.txt      # Replace in line range
+sed '5d' filename.txt                # Delete line 5
+sed '3,6d' filename.txt              # Delete lines 3 to 6
+sed -n '60,80p' filename             # To display lines 60 to 80 of a file using sed
+
+whereis mkdir -- Use case: Useful when troubleshooting or understanding where commands are stored.
+users --- Purpose: Lists currently logged-in users.
+date -s "20240617" --- Synchronize time manually in isolated systems.
+timedatectl --- Use case: Check timezone and NTP sync status.
+du -h Ansible/       # Shows size of each file/folder
+du -sh Ansible/      # Shows only the total summary
+hostname
+hostname -i     # Show only IP address
+
+whatis
+------
+Purpose: Give a brief description of a command.
+whatis ls
+whatis mkdir
+
+systemctl and service
+---------------------
+# List all services
+systemctl list-unit-files   # Press 'q' to quit
+
+# Service status
+systemctl status sshd
+
+# Start/Stop/Restart
+service sshd start
+service sshd stop
+
+last
+----
+last
+last -R ec2-user    # Show for specific user
+last -F             # Show login/logout times
+
+ps
+--
+ps
+ps -a
+ps -ef        # Full formatted list
+
+# Filter by user or command
+ps -ef | grep -i "ec2-user"
+ps -ef | grep -i "jenkins"
+
+SSH Login with .pem Key (Public Key Auth)
+==========================================
+ Steps to Enable Key-based Login for a New User (e.g., devuser)
+ sudo mkdir /home/devuser/.ssh
+sudo cp /home/ec2-user/.ssh/authorized_keys /home/devuser/.ssh/
+sudo chown -R devuser:devuser /home/devuser/.ssh
+sudo chmod 700 /home/devuser/.ssh
+sudo chmod 600 /home/devuser/.ssh/authorized_keys
+
+SSH from Local:
+
+ssh -i "your-key.pem" devuser@your-ec2-public-ip
+
+Check User's Group Membership
+=============================
+id kkfunda          # Shows UID, GID, and group membership
+groups kkfunda      # Lists all groups the user belongs to
+
+System Info Commands
+====================
+lscpu                 # Display CPU architecture info
+lshw                  # Show detailed hardware info (needs root)
+
+🔌 Shutdown and Memory Watch
+============================
+sudo shutdown now     # Shutdown system immediately
+watch -d free -h      # Monitor memory usage live with highlight
+
+free
+=====
+
+The free command in Linux is used to display information about the system's memory usage. It provides details about total memory, used memory, free memory, and memory used by buffers/cache, which can help you monitor how your system's RAM is being utilized.
+
+Useful options for the free command:
+
+free -h: Displays the memory in a human-readable format (e.g., GB, MB).
+free -m: Shows the memory in megabytes.
+free -g: Shows the memory in gigabytes.
+free -s <seconds>: Repeats the output every <seconds>.
+free -t: Shows the total memory (including swap).
+
+
+
+AWK command
+============
+ 
+-> awk '{print}' table.txt  —-> display the complete data. 
+-> awk '/manager/ {print}' table.txt  —> manger matches.
+-> awk '{print $0}' table.txt  → Display the complete data.
+→  awk '{print $1,$4}' table.txt
+
+→ awk '{print NR,$1,$4}' table.txt   --> NR means row number
+
+→ awk '{print NR,$1,$NF}' table.txt  → NF means last field 
+—> awk 'NR==3, NR==6 {print NR,$0}' table.txt   --> row 3 to 6
+→ awk '{print $1,"----->",$4}' table.txt
+
+-> awk '$3 > 50 {print $1, $2}' table.txt
+
+-> awk 'NR >= 10 && NR <= 20' file.txt --> This will print lines 10 to 20 from file.txt
+
+-> awk '{print $1, $2 * $3}' file.txt
+
+
+awk command use cases
+======================
+
+1. Log File Analysis
+--------------------
+system administrators often use awk to analyze log files (e.g., Apache logs, system logs) for errors or performance metrics.
+
+Example: Find the number of error entries in an Apache log:
+
+
+awk '$9 >= 400 {print $0}' access.log
+
+This command looks for HTTP status codes greater than or equal to 400 (indicating errors like 404 or 500) and prints the log entries with errors.
+
+2. User Data Extraction
+-----------------------
+
+who -u | awk '{print $1, $3, $4}'
+
+This extracts the username, login date, and login time for users currently logged in.
+
+
+3. Server Log Parsing (Parsing and Filtering Logs)
+--------------------------------------------------
+
+awk '$1 == "192.168.1.100" {print $0}' access.log
+
+ex:
+192.168.1.1 - - [01/Feb/2025:12:34:56 +0000] "GET /index.html HTTP/1.1" 200 2345 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+192.168.1.1 - - [01/Feb/2025:12:34:56 +0000] "GET /index.html HTTP/1.1" 200 2345 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+
+192.168.1.100 - - [01/Feb/2025:12:34:56 +0000] "GET /index.html HTTP/1.1" 200 2345 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+
+192.168.1.1 - - [01/Feb/2025:12:34:56 +0000] "GET /index.html HTTP/1.1" 200 2345 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+
+192.168.1.1 - - [01/Feb/2025:12:34:56 +0000] "GET /index.html HTTP/1.1" 200 2345 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+
+
+
+This filters log entries for requests coming from IP address 192.168.1.100.
+
+
+4. Monitoring Disk Usage
+------------------------
+
+df -h | awk '{gsub("%", "", $5); if ($5+0 > 18) print $1, $5 "%"}'
+
+
+
+This prints all filesystems that are over 90% full, which is useful for system monitoring and alerting.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+wget
+====
+
+The wget command in Linux is a widely used tool for downloading files from the web. It supports downloading via HTTP, HTTPS, and FTP protocols, and it can handle things like resuming interrupted downloads or downloading multiple files at once.
+
+
+Ex: wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
+
+
+
+
+
+cron tab: scheduling tasks
+===========================
+
+
+syntax:
+-------
+
+* * * * * /path/to/command
+- - - - -
+| | | | |  
+| | | | +---- Day of the week (0 - 6) (Sunday = 0)
+| | | +------ Month (1 - 12)
+| | +-------- Day of the month (1 - 31)
+| +---------- Hour (0 - 23)
++------------ Minute (0 - 59)
+
+
+
+→ Crontab is available for all the users.
+crontab -l  : How many jobs are currently configure.
+crontab -e  —>edit the crontab
+crontab -r  —> remove the crontab
+#crontab -l -u kkfunda  → to see other users crontab, only root user can run this.
+
+$sudo touch /etc/cron.allow  —> remove cron access to normal user.
+#sudo vi /etc/cron.allow  —> add user here.
+
+vi hello.sh
+
+echo “welcome to KK FUNDA”
+echo “today date is:”
+date
+uptime
+
+How to run the shell script?
+
+sh hello.sh  —-> It will run
+./hello.sh    —--> don't have exec permissions → chmod u+x hello.sh
+
+*/1 * * * * /home/ec2-user/hello.sh  >> /home/ec2-user/hello.log
+
+
+
+crontab -e —-> paste that command
+crontab -l
+NOTE: we dont want to loose the previous o/p[ >> ]  → append the standard o/p.
