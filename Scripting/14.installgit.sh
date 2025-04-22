@@ -2,8 +2,8 @@
 
 ID=$(id -u)
 
-if [ ID -ne 0 ]
-then
+if [ ID -ne 0 ]; then
+
     echo "ERROR: Please run script has a root user"
     exit 1
 
@@ -13,8 +13,8 @@ fi
 
 yum install git -y
 
-if [ $? - ne 0 ]
-then
+if [ $? - ne 0 ]; then
+
     echo "ERROR: GIT installation is failed "
 
 else
