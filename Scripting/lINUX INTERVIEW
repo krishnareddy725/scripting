@@ -529,3 +529,6 @@ sh hello.sh  —-> It will run
 crontab -e —-> paste that command
 crontab -l
 NOTE: we dont want to loose the previous o/p[ >> ]  → append the standard o/p.
+
+curl https://github.com == To check your system is having the internet access or not. if no access it will hung.
+
