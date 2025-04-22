@@ -5,7 +5,7 @@ TIMESTAMP=$(date+$f-%H-%M-%S)
 logsfile="/tmp/$0-TIMESTAMP.log"
 
 VALIDATION( ) {
-    if [ $? -ne 0 ]
+    if [ $? -ne 0 ]; then
         echo " ERROR!: $2 ..............installation is FAILED "
         exit 1
     
@@ -16,7 +16,7 @@ VALIDATION( ) {
 
 }
 
-if [ ID -ne 0 ]
+if [ ID -ne 0 ]; then
     echo " Please run this script has a root user "
     exit 1
 
