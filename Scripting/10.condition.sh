@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NUMBER=1
+read -s NUMBER
 
 if [ $NUMBER -gt 100 ]; then
     
