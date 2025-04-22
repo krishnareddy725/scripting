@@ -9,9 +9,10 @@ VALIDATION( ) { #after variables we will write the function
 
     else
         echo " Installation is success "
+    fi
 }
 
-if[ id -ne 0 ]
+if [ ID -ne 0 ]
 then
     echo "ERROR: Please run script as a root user"
     exit 1
