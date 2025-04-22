@@ -2,8 +2,8 @@
 
 ID=$(id -u)
 
-if [ id -eq 0 ]# check the space here
-then 
+if [ id -eq 0 ]; then # check the space here
+
     echo "you are root user"
 
 else
