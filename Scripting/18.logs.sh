@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ID=$(id -u)
-TIMESTAMP=$(date+$f-%H-%M-%S)
+f="Today"
+TIMESTAMP=$(date +"$f-%H-%M-%S")
 logsfile="/tmp/$0-TIMESTAMP.log"
 
 VALIDATION( ) {
