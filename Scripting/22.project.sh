@@ -28,7 +28,7 @@ VALIDATE( ) {
 
         echo -e "$G SUCCESS:$2 .....................Installation is SUCCESS"
         
-    }
+}
 
 if [ $ID -ne 0 ]; then
 
