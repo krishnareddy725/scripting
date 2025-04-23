@@ -14,9 +14,10 @@ f="Today"
 TIMESTAMP=$(date +"$f-%H-%M-%S")
 logfile="/tmp/$(basename $0)-$TIMESTAMP.log"
 
-R="\e[31m
-G="\e[32m
-Y="\e[33m
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
 VALIDATE( ) {
     if [ $? -ne 0 ]; then
@@ -29,7 +30,7 @@ VALIDATE( ) {
         
 }
 
-if [ ID -ne 0 ]; then
+if [ $ID -ne 0 ]; then
 
     echo -e "$R Please run script has a ROOT user"
     exit 1
@@ -46,14 +47,14 @@ do
 
 yum list installed $i &>> $logfile
 
-    if [ &? -ne 0 ]; then
+    if [ $? -ne 0 ]; then
 
         yum install $i -y &>> $logfile
-        VALIDATE $? "installation of $i"
+        VALIDATE $? "$i"
 
     else
 
-        echo -e " $i is already installed ...$Y SKIPPING $N"
+        echo -e " $Y $i is already installed ...$Y SKIPPING $N "
 
     fi
 
