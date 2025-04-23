@@ -10,7 +10,7 @@ G="\e[32m"
 Y="\e[33m"
 
 VALIDATE( ) {
-    if [ $? -ne 0 ]
+    if [ $? -ne 0 ]; then
         echo "ERROR!$2.........$R Installation FAILED"
         exit 1
     else
@@ -18,7 +18,7 @@ VALIDATE( ) {
     fi
 }
 
-if [ ID -ne 0 ]
+if [ $ID -ne 0 ]; then
     echo "$R ERROR! Please run script has a root user "
     exit 1
 
