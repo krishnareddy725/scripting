@@ -11,19 +11,19 @@ Y="\e[33m"
 
 VALIDATE( ) {
     if [ $? -ne 0 ]; then
-        echo "ERROR!$2.........$R Installation FAILED"
+        echo -e "ERROR!$2.........$R Installation FAILED"
         exit 1
     else
-        echo "SUCCESS!$2..........$G Installation SUCCESS"
+        echo -e "SUCCESS!$2..........$G Installation SUCCESS"
     fi
 }
 
 if [ $ID -ne 0 ]; then
-    echo "$R ERROR! Please run script has a root user "
+    echo -e "$R ERROR! Please run script has a root user "
     exit 1
 
 else
-    echo "$G you are running this script has a root user"
+    echo -e "$G you are running this script has a root user"
 
 fi
 
