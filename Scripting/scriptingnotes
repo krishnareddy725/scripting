@@ -163,10 +163,10 @@ date+%f-%H-%M-%S --- To get the date of the system.
 
 COLOURS IN LINUX
 =================
-\e[31m --RED   e--means enable 31--RED
-\e[32m -- GREEN                32 -- green
-\e[33m -- yellow               33 -- yellow
-\e[0m  -- normal                0 -- normal colour
+"\e[31m" --RED   e--means enable 31--RED
+"\e[32m" -- GREEN                32 -- green
+"\e[33m" -- yellow               33 -- yellow
+"\e[0m"  -- normal                0 -- normal colour
 
 
 
