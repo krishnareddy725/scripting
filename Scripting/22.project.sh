@@ -53,6 +53,6 @@ if [ &? -ne 0 ]; then
 
 else
 
-    echo -e " $Y $i is already installed"
+    echo -e " $i is already installed ...$Y SKIPPING $N"
 
 fi
