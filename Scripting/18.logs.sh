@@ -3,7 +3,7 @@
 ID=$(id -u)
 f="Today"
 TIMESTAMP=$(date +"$f-%H-%M-%S")
-logsfile="/tmp/$0-TIMESTAMP.log"
+logfile="/tmp/$(basename $0)-$TIMESTAMP.log"
 
 VALIDATION( ) {
     if [ $? -ne 0 ]; then
@@ -17,7 +17,7 @@ VALIDATION( ) {
 
 }
 
-if [ ID -ne 0 ]; then
+if [ $ID -ne 0 ]; then
     echo " Please run this script has a root user "
     exit 1
 
@@ -28,8 +28,8 @@ fi
 
 yum install nginx -y
 
-VALIDATION $? "installing nging" &>> logsfile
+VALIDATION $? "installing nging" &>> $logfile
 
 yum install mysql -y
 
-VALIDATION $? "installing mysql" &>> logsfile
+VALIDATION $? "installing mysql" &>> $logfile
