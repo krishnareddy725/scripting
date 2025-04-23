@@ -46,15 +46,15 @@ do
 
 yum list installed $i &>> $logfile
 
-if [ &? -ne 0 ]; then
+    if [ &? -ne 0 ]; then
 
-    yum install $i -y &>> $logfile
-    VALIDATE $? "installation of $i"
+        yum install $i -y &>> $logfile
+        VALIDATE $? "installation of $i"
 
-else
+    else
 
-    echo -e " $i is already installed ...$Y SKIPPING $N"
+        echo -e " $i is already installed ...$Y SKIPPING $N"
 
-fi
+    fi
 
 done
