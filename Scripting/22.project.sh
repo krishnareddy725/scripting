@@ -9,7 +9,7 @@
 
 # if not root user, through the error
 
-ID=$(id-u)
+ID=$(id -u)
 f="Today"
 TIMESTAMP=$(date +"$f-%H-%M-%S")
 logfile="/tmp/$(basename $0)-$TIMESTAMP.log"
@@ -56,5 +56,3 @@ else
     echo -e " $Y $i is already installed"
 
 fi
-
-
