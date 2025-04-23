@@ -56,3 +56,5 @@ else
     echo -e " $i is already installed ...$Y SKIPPING $N"
 
 fi
+
+done
