@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ID=$(id -u)
-TIMESTAMP=$(date +$f-%H-%M-%S)
-logfile="/tmp/$0-TIMESTAMP.log"
+f="Today"
+TIMESTAMP=$(date +"$f-%H-%M-%S")
+logfile="/tmp/$(basename $0)-$TIMESTAMP.log"
 
 R="\e[31m"
 G="\e[32m"
