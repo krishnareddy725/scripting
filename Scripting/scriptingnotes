@@ -99,7 +99,7 @@ else
    if all above conditons are false
 
 
-ex: if[ $NUMBER -gt 100 ] == To declare right syntax
+ex: if[ $NUMBER -gt 100 ]; then == To declare right syntax
 
 
 IMP NOTE:- Generall script is having 1000 of lines but if we get error at 100 line, then what we will do?
@@ -170,8 +170,30 @@ COLOURS IN LINUX
 
 
 
+=======================================================================
 
+LOOPS:
+Loops are used to install the all packages.
+ex:-
+#!/bin/bash
 
+for i in {1..100} 
+do
+    echo"$i"
+done
+========================================================================
+
+SED EDITOR(stream line editor)
+------------------------------
+sed -e '1 a i am learning shell script' file.txt --> Means after first line we wants to add this line temparary
+
+e --> enable, it is temparary change, i --> perminent change
+1 --> first line, 1a means first line after, 1i means first line before
+a --> append
+
+sed -i "12 a i am krishna reddy" /etc/passwd.bkp --> Means after 12 line " i am krishna reddy will added perminently.
+
+sed -i '1i i am learing python' /etc/passwd.bkp --> means it will add first line before
 
 
 
